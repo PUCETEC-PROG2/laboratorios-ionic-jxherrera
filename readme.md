@@ -2,9 +2,9 @@
 
 ## Información del Estudiante
 
-- **Nombre:** [Tu nombre completo aquí]
-- **Carrera:** [Tu carrera]
-- **Fecha de inicio:** [Fecha]
+- **Nombre:** Josue Xavier Herrera Vera
+- **Carrera:** Desarrollo de Software - PuceTec
+- **Fecha de inicio:** 11/06/2026
 
 ---
 
