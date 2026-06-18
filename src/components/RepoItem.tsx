@@ -1,7 +1,7 @@
 import { IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonThumbnail } from '@ionic/react';
 import './RepoItem.css'
 import React from 'react'
-import { pencil, trash } from 'ionicons/icons';
+import { language, pencil, trash } from 'ionicons/icons';
 import { Repository } from '../interfaces/Repository';
 
 
@@ -10,12 +10,16 @@ const RepoItem: React.FC<Repository> = (repository) => {
          <IonItemSliding>
                   <IonItem>
                     <IonThumbnail slot='start'>
-                      <img src={repository.avatarUrl} alt={repository.name}/>
+                      <img src={repository.owner.avatar_url} alt={repository.name}/>
                     </IonThumbnail>
                     <IonLabel>
                       <h3>{repository.name}</h3>
                       <p>{repository.description}</p>
-                      <p><strong>Lenguaje: </strong>{repository.language}</p>
+                      { language != null && language != "" &&
+                      (<p>
+                        <strong>Language:</strong>
+                        {repository.language}
+                      </p>)}
                     </IonLabel>
                   </IonItem>
                   <IonItemOptions>
