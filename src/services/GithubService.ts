@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Repository } from "../interfaces/Repository";
 import { GithubUser } from "../interfaces/GithubUser";
+import { RepositoryPayload } from "../interfaces/RepositoryPayload";
 
 const GITHUB_API_URL =
   import.meta.env.VITE_GITHUB_API_URL || "https://api.github.com";
@@ -24,6 +25,7 @@ export const fetchRepositories = async (): Promise<Repository[]> => {
         sort: "created",
         direction: "desc",
         affiliation: "owner",
+        t: Date.now()
       },
     });
 
@@ -33,6 +35,18 @@ export const fetchRepositories = async (): Promise<Repository[]> => {
     throw new Error((error as Error).message);
   }
 };
+
+
+export const createRepository = async (repository : RepositoryPayload): Promise<Repository> => {
+    try {
+        const response = await githubClient.post("user/repos", repository);
+        return response.data as Repository
+    } catch (error) {
+        console.error("Error al agregar repositorios", error);
+        throw new Error((error as Error).message);
+    }
+};
+    
 
 export const fetchUserInfo = async (): Promise<GithubUser | null> => {
   try {

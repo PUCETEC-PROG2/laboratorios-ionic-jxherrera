@@ -46,7 +46,7 @@ const Tab3: React.FC = () => {
               </IonCardContent>
             </IonCard>
           )}
-          {errorMsg != "" && <IonText color="dangar">{errorMsg}</IonText>}
+          {errorMsg != "" && <IonText color="danger">{errorMsg}</IonText>}
         </div>
         {loading && <LoadingSpinner />}
 
