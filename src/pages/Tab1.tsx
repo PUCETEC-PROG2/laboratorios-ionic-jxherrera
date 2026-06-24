@@ -9,14 +9,16 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const Tab1: React.FC = () => {
   const [repositoryList, setRepositoryList] = React.useState<Repository[]> ([]);
   const [loading, setLoading] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("")
 
   const loadRepos = async () => {
-    setLoading(true)
-    const reposData = await fetchRepositories();
-    setRepositoryList(reposData)
-    setLoading(false)
+    setLoading(true);
+    fetchRepositories()
+      .then((reposData) => setRepositoryList(reposData))
+      .catch((error) => setErrorMsg("Error  al cargar repositorio." + error))
+      .finally(() => setLoading(false));
 
-  }
+  };
 
   useIonViewWillEnter(() => {
     loadRepos();
@@ -30,7 +32,7 @@ const Tab1: React.FC = () => {
           <IonTitle>Repositorios</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="Ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Repositorios</IonTitle>
@@ -46,9 +48,9 @@ const Tab1: React.FC = () => {
 
         </IonList>
         {loading && <LoadingSpinner />}
-        {!loading && repositoryList.length == 0 &&
+        {errorMsg != "" &&
         (<IonText color="danger">
-          <p>No se pudeo cargar el repo</p>
+          <p>{errorMsg}</p>
         </IonText>)
         }
 
