@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 244, 35);
+    background-color: rgba(63, 26, 73, 0.373);
 }
 .loading-spinner {
     width: 64px;
